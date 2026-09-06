@@ -1,4 +1,5 @@
 # mntui
+<img width="1281" height="603" alt="image" src="https://github.com/user-attachments/assets/89c28902-6b1c-429b-a86f-06d9d510afd1" />
 
 A simple TUI for managing disks, filesystems, and mounts on Linux.
 Inspired by `nmtui` and `cfdisk`, mntui provides a compact, keyboard-driven
