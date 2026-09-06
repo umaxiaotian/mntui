@@ -157,7 +157,7 @@ export NUITKA_CACHE_DIR=/tmp/mntui-nuitka-cache
 python -m nuitka --mode=standalone --include-package=mntui --nofollow-import-to=mypy,pytest,pydantic.mypy,pygments \
   --output-dir=build/standalone --output-filename=mntui --jobs=4 \
   src/mntui/__main__.py
-python -m nuitka --mode=onefile --include-package=mntui --nofollow-import-to=mypy,pytest,pydantic.mypy,pygments \
+python -m nuitka --mode=onefile --onefile-no-compression --include-package=mntui --nofollow-import-to=mypy,pytest,pydantic.mypy,pygments \
   --output-dir=build/onefile --output-filename=mntui --jobs=4 \
   src/mntui/__main__.py
 ```
@@ -165,6 +165,8 @@ python -m nuitka --mode=onefile --include-package=mntui --nofollow-import-to=myp
 Distribute the **entire** `build/standalone/__main__.dist/` directory for standalone
 mode, or `build/onefile/mntui` for onefile mode. Smoke-check each with `--version`
 and `--check`. Onefile extracts its Python runtime into a temporary directory.
+Onefile compression is disabled to avoid failures with zstd builds that do not
+support worker threads; the executable is larger as a result.
 Nuitka packages Python modules and native Python dependencies; no storage utilities
 are included or downloaded by the application.
 

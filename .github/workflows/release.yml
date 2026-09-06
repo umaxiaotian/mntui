@@ -78,7 +78,8 @@ jobs:
         env:
           NUITKA_CACHE_DIR: ${{ runner.temp }}/nuitka-cache
         run: |
-          python -m nuitka --mode=onefile --include-package=mntui \
+          # The runner zstd library may not support Nuitka's parallel compression.
+          python -m nuitka --mode=onefile --onefile-no-compression --include-package=mntui \
             --nofollow-import-to=mypy,pytest,pydantic.mypy,pygments \
             --output-dir=build/onefile --output-filename=mntui --jobs=2 \
             src/mntui/__main__.py
