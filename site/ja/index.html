@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>mntui — Linuxのディスク管理</title>
+  <meta name="description" content="Linuxのディスク確認、パーティションのフォーマット、マウント管理をひとつの画面で。nmtuiとcfdiskに着想を得た、キーボードで操作するツールです。">
+  <meta name="theme-color" content="#111816">
+  <link rel="alternate" hreflang="en" href="../index.html">
+  <link rel="alternate" hreflang="ja" href="../ja/index.html">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<a class="skip" href="#main">本文へ移動</a>
+<header class="wrap"><a class="brand" href="../ja/index.html"><span aria-hidden="true">▣</span> mntui</a><nav aria-label="メインナビゲーション"><a href="#features">できること</a><a href="#start">はじめる</a><a href="#usage">操作方法</a></nav><div class="languages" aria-label="Language"><a href="../index.html" lang="en" hreflang="en" >EN</a><span>/</span><a href="../ja/index.html" lang="ja" hreflang="ja" aria-current="page">日本語</a></div></header>
+<main id="main" class="wrap">
+<section class="hero"><p class="eyebrow"><span class="dot"></span>Linux · ターミナルUI · MITライセンス</p><h1>ディスク管理を、<br>ターミナルから。</h1><p class="lead">Linuxのディスク確認、パーティションのフォーマット、マウント管理をひとつの画面で。nmtuiとcfdiskに着想を得た、キーボードで操作するツールです。</p><div class="actions"><a class="button primary" href="https://github.com/umaxiaotian/mntui/releases">Linux版をダウンロード <span aria-hidden="true">↗</span></a><a class="button" href="https://github.com/umaxiaotian/mntui">ソースコード <span aria-hidden="true">↗</span></a></div><p class="command"><span aria-hidden="true">$</span> mntui --dry-run</p></section>
+<figure class="screen"><div class="screenbar"><span aria-hidden="true">● ● ●</span><span>mntui / Linux</span></div><img src="https://github.com/user-attachments/assets/89c28902-6b1c-429b-a86f-06d9d510afd1" width="1281" height="603" alt="Linuxターミナルで表示したmntuiのディスク管理画面" fetchpriority="high"><figcaption>Linuxのストレージ管理を、使い慣れたターミナルで。</figcaption></figure>
+<section id="features"><div class="section-heading"><span class="eyebrow">01 / FEATURES</span><h2>できること</h2></div><div class="features"><article><span class="number">01</span><h3>確認する</h3><p>ディスク、パーティション、ファイルシステム、UUID、マウント先を一覧で確認できます。</p></article><article><span class="number">02</span><h3>準備する</h3><p>未使用のディスクにGPTと全容量のパーティションを作成。通常のパーティションをext4・XFS・Btrfsでフォーマットできます。</p></article><article><span class="number">03</span><h3>マウントする</h3><p>UUIDでマウントし、必要に応じて/etc/fstabに保存。アンマウントにも対応します。</p></article><article><span class="number">04</span><h3>事前に確かめる</h3><p>必要なコマンドの有無を確認し、--dry-runで変更予定を確認できます。</p></article></div></section>
+<section id="start"><div class="section-heading"><span class="eyebrow">02 / GET STARTED</span><h2>はじめる</h2></div><div class="install"><article><h3>Linuxバイナリ</h3><p>リリースからmntui-linux-x86_64とSHA256SUMSを同じディレクトリにダウンロードし、検証してから実行します。</p><pre><code>sha256sum --check SHA256SUMS
+chmod +x mntui-linux-x86_64
+./mntui-linux-x86_64 --check
+./mntui-linux-x86_64 --dry-run</code></pre><p class="muted">Pythonのインストールは不要です。対象はglibcを使用するx86_64 Linux（Ubuntu 22.04を基準にビルド）。他のアーキテクチャやmusl環境は対象外です。ストレージ操作用のLinuxコマンドは別途必要です。</p></article><article><h3>ソースから実行</h3><p>LinuxとPython 3.12以上が必要です。リポジトリを取得して、仮想環境にインストールします。</p><pre><code>git clone https://github.com/umaxiaotian/mntui.git
+cd mntui
+python3 -m venv .venv
+. .venv/bin/activate
+python -m pip install .
+mntui --check
+mntui --dry-run</code></pre></article></div><div class="dependency"><h3>必要なシステムコマンド</h3><p>lsblk・blkid・findmnt・mount・umountが必要です。GPT作成にはsfdisk、フォーマットにはmkfs.ext4・mkfs.xfs・mkfs.btrfsを使用します。mntui --checkで不足しているコマンドと、ディストリビューションに応じたインストール例を確認できます。</p><p>デバイスの閲覧は権限によって一般ユーザーでも可能です。変更にはroot権限が必要です。mntuiが自動でsudoを実行することはありません。</p><pre><code>sudo .venv/bin/mntui</code></pre></div></section>
+<section id="usage"><div class="section-heading"><span class="eyebrow">03 / CONTROLS</span><h2>操作方法</h2></div><div class="install"><dl class="keys"><div><dt><kbd>↑ ↓ / Space</kbd></dt><dd>項目を選択</dd></div><div><dt><kbd>Tab / Shift+Tab</kbd></dt><dd>操作対象を移動</dd></div><div><dt><kbd>Enter</kbd></dt><dd>ボタンを実行</dd></div><div><dt><kbd>Esc</kbd></dt><dd>戻る・キャンセル</dd></div><div><dt><kbd>q</kbd></dt><dd>選択画面から戻る／ディスク一覧から終了</dd></div></dl><div><pre><code>mntui --check
+mntui --dry-run
+mntui --log-file /tmp/mntui.log</code></pre><p>ドライランはデバイスの検出と変更内容の検証を行い、ストレージやfstabは変更しません。ログファイルを明示した場合はログを書き込むことがあります。実際のディスク書き込み中は処理を中断しないでください。</p></div></div></section>
+<section id="safety" class="safety"><span class="eyebrow">04 / SAFETY</span><h2>書き込みの前に</h2><p class="warning">パーティション作成とフォーマットはデータを完全に消去します。バックアップを取り、対象デバイスを確認してください。開発初期のため、大切なデータを扱う前に使い捨てのVMで試してください。</p><ul><li>システムディスク、読み取り専用デバイス、LVM・RAID・暗号化ストレージの階層デバイスは変更できません。</li><li>パーティション作成とフォーマットは、それぞれ確認が必要です。初期化後はディスク一覧に戻って更新し、新しいパーティションを選択してください。</li><li>コンテナではデバイスやマウント情報が不完全な場合があるため、ホスト上で実行してください。他のツールによる同時操作やfstabの同時編集は避けてください。</li><li>ディスク操作は元に戻せません。マウント成功後にfstabへの保存が失敗した場合、マウントは維持されます。アンマウントしてもfstabの設定は削除されません。</li></ul><a href="https://github.com/umaxiaotian/mntui#safety-and-limits">詳しいドキュメント（英語） ↗</a></section>
+</main><footer class="wrap"><p><strong>mntui</strong> <span>Linuxのディスク・マウント管理。</span></p><div><a href="https://github.com/umaxiaotian/mntui">GitHub ↗</a><a href="https://github.com/umaxiaotian/mntui/blob/main/LICENSE">MIT License</a></div></footer>
+</body>
+</html>

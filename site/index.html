@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>mntui — Linux disk management</title>
+  <meta name="description" content="Inspect disks, format partitions, and manage mounts on Linux. A keyboard-driven interface inspired by nmtui and cfdisk.">
+  <meta name="theme-color" content="#111816">
+  <link rel="alternate" hreflang="en" href="./index.html">
+  <link rel="alternate" hreflang="ja" href="./ja/index.html">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="wrap"><a class="brand" href="./index.html"><span aria-hidden="true">▣</span> mntui</a><nav aria-label="Main navigation"><a href="#features">What you can do</a><a href="#start">Get started</a><a href="#usage">Using mntui</a></nav><div class="languages" aria-label="Language"><a href="./index.html" lang="en" hreflang="en" aria-current="page">EN</a><span>/</span><a href="./ja/index.html" lang="ja" hreflang="ja" >日本語</a></div></header>
+<main id="main" class="wrap">
+<section class="hero"><p class="eyebrow"><span class="dot"></span>Linux · Terminal UI · MIT license</p><h1>Your disks, from the terminal.</h1><p class="lead">Inspect disks, format partitions, and manage mounts on Linux. A keyboard-driven interface inspired by nmtui and cfdisk.</p><div class="actions"><a class="button primary" href="https://github.com/umaxiaotian/mntui/releases">Download for Linux <span aria-hidden="true">↗</span></a><a class="button" href="https://github.com/umaxiaotian/mntui">View source <span aria-hidden="true">↗</span></a></div><p class="command"><span aria-hidden="true">$</span> mntui --dry-run</p></section>
+<figure class="screen"><div class="screenbar"><span aria-hidden="true">● ● ●</span><span>mntui / Linux</span></div><img src="https://github.com/user-attachments/assets/89c28902-6b1c-429b-a86f-06d9d510afd1" width="1281" height="603" alt="mntui disk management interface in a Linux terminal" fetchpriority="high"><figcaption>A familiar terminal interface for Linux storage.</figcaption></figure>
+<section id="features"><div class="section-heading"><span class="eyebrow">01 / FEATURES</span><h2>What you can do</h2></div><div class="features"><article><span class="number">01</span><h3>Inspect</h3><p>View disks, partitions, filesystems, UUIDs, and mount points.</p></article><article><span class="number">02</span><h3>Prepare</h3><p>Create a GPT table with one full-size partition on an unused disk. Format ordinary partitions as ext4, XFS, or Btrfs.</p></article><article><span class="number">03</span><h3>Mount</h3><p>Mount by UUID, optionally save to /etc/fstab, and unmount filesystems.</p></article><article><span class="number">04</span><h3>Preview</h3><p>Check available commands and preview planned changes with --dry-run.</p></article></div></section>
+<section id="start"><div class="section-heading"><span class="eyebrow">02 / GET STARTED</span><h2>Get started</h2></div><div class="install"><article><h3>Linux binary</h3><p>Download mntui-linux-x86_64 and SHA256SUMS from a release. Place them in the same directory and verify the download before running it.</p><pre><code>sha256sum --check SHA256SUMS
+chmod +x mntui-linux-x86_64
+./mntui-linux-x86_64 --check
+./mntui-linux-x86_64 --dry-run</code></pre><p class="muted">No Python installation required. Builds target x86_64 Linux with glibc (Ubuntu 22.04 baseline); other architectures and musl hosts are not covered. Linux storage utilities are still required.</p></article><article><h3>Run from source</h3><p>Requires Linux and Python 3.12 or newer. Clone the repository, then install into a virtual environment.</p><pre><code>git clone https://github.com/umaxiaotian/mntui.git
+cd mntui
+python3 -m venv .venv
+. .venv/bin/activate
+python -m pip install .
+mntui --check
+mntui --dry-run</code></pre></article></div><div class="dependency"><h3>System commands</h3><p>Requires lsblk, blkid, findmnt, mount, and umount. GPT creation uses sfdisk. Formatting uses mkfs.ext4, mkfs.xfs, or mkfs.btrfs. Run mntui --check to see what is missing and installation examples for your distribution.</p><p>Viewing devices may work without root. Changes require root; mntui does not invoke sudo itself.</p><pre><code>sudo .venv/bin/mntui</code></pre></div></section>
+<section id="usage"><div class="section-heading"><span class="eyebrow">03 / CONTROLS</span><h2>Using mntui</h2></div><div class="install"><dl class="keys"><div><dt><kbd>↑ ↓ / Space</kbd></dt><dd>Select an entry</dd></div><div><dt><kbd>Tab / Shift+Tab</kbd></dt><dd>Move between controls</dd></div><div><dt><kbd>Enter</kbd></dt><dd>Activate a button</dd></div><div><dt><kbd>Esc</kbd></dt><dd>Go back or cancel</dd></div><div><dt><kbd>q</kbd></dt><dd>Go back from a selection screen or quit the disk list</dd></div></dl><div><pre><code>mntui --check
+mntui --dry-run
+mntui --log-file /tmp/mntui.log</code></pre><p>Dry-run discovers devices and validates planned changes without modifying storage or fstab. An explicit log file may still be written. Do not interrupt disk writes.</p></div></div></section>
+<section id="safety" class="safety"><span class="eyebrow">04 / SAFETY</span><h2>Before you write</h2><p class="warning">Partitioning and formatting permanently destroy data. Back up your data and confirm the target device. Test this early version in a disposable VM before using valuable storage.</p><ul><li>System disks, read-only devices, and layered LVM, RAID, or encrypted storage are blocked for changes.</li><li>Partitioning and formatting require separate confirmations. After initialization, return to the disk list to refresh, then select the new partition.</li><li>Run on the host: device and mount visibility in containers may be incomplete. Avoid concurrent storage operations or fstab edits.</li><li>Disk operations cannot be rolled back. If mounting succeeds but saving to fstab fails, the filesystem stays mounted. Unmounting does not remove saved fstab entries.</li></ul><a href="https://github.com/umaxiaotian/mntui#safety-and-limits">Read the full documentation ↗</a></section>
+</main><footer class="wrap"><p><strong>mntui</strong> <span>Linux disk and mount management.</span></p><div><a href="https://github.com/umaxiaotian/mntui">GitHub ↗</a><a href="https://github.com/umaxiaotian/mntui/blob/main/LICENSE">MIT License</a></div></footer>
+</body>
+</html>
