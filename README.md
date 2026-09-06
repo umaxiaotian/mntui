@@ -8,9 +8,6 @@ and `cfdisk`.
 > data and check the target device before confirming. Test this early version in a
 > disposable VM before using it on valuable storage.
 
-Website: [English](site/index.html) · [日本語](site/ja/index.html)
-([preview and publishing](docs/PAGES.md)).
-
 ## Features
 
 - View disks, partitions, filesystems, and mount points.
