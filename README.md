@@ -188,7 +188,8 @@ git push origin v0.1.0
 Release assets:
 
 - `mntui-linux-x86_64`: onefile executable; run `chmod +x` after downloading.
-- `mntui-linux-x86_64-standalone.tar.gz`: standalone directory, including its libraries.
+- `mntui-linux-x86_64-standalone.tar.gz`: standalone directory, including its libraries;
+  extract it and run `./mntui-linux-x86_64-standalone/mntui.bin`.
 - `LICENSE` and `SHA256SUMS`: license and SHA-256 checksums.
 
 Builds use Ubuntu 22.04 x86_64 and Python 3.14.4 with pinned Python dependencies.

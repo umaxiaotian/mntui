@@ -90,7 +90,8 @@ jobs:
           import subprocess
           from pathlib import Path
 
-          for binary in ('build/onefile/mntui', 'build/onefile/__main__.dist/mntui'):
+          # On Linux, Nuitka adds .bin to the executable inside a onefile payload.
+          for binary in ('build/onefile/mntui', 'build/onefile/__main__.dist/mntui.bin'):
               executable = str(Path(binary).resolve())
               for arguments, missing, expected in (
                   (['--version'], True, 0),
